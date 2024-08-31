@@ -1,0 +1,26 @@
+[package]
+name = "abootimg-oxide"
+edition = "2021"
+description = "Android boot image (boot.img) parser"
+
+version.workspace = true
+authors.workspace = true
+readme = "README.md"
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+binrw = "0.14.0"
+
+[workspace]
+members = [ "mkbootimg","unpack_bootimg"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Axel Karjalainen <axel@axka.fi>"]
+repository = "https://github.com/axelkar/abootimg-oxide"
+license = "MIT OR Apache-2.0"
+
+[workspace.dependencies]
+clap = { version = "4.5.16", features = ["derive"] }
