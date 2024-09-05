@@ -276,7 +276,12 @@ impl Header {
         Ok(match u32::from_le_bytes(version_buf) {
             0..=2 => Self::V0(HeaderV0::read(reader)?),
             3 | 4 => Self::V3(HeaderV3::read(reader)?),
-            _ => todo!(), // FIXME!!!
+            version => {
+                return Err(binrw::Error::AssertFail {
+                    pos: 0x28,
+                    message: format!("Unknown header version: {}", version),
+                })
+            }
         })
     }
     /// Serializes an Android boot image header to a writer.
