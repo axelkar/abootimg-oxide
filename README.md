@@ -1,5 +1,8 @@
 # abootimg-oxide
 
+[![Crates.io](https://img.shields.io/crates/v/abootimg-oxide)](https://lib.rs/crates/abootimg-oxide)
+[![Documentation](https://docs.rs/abootimg-oxide/badge.svg)](https://docs.rs/abootimg-oxide)
+
 Android boot image (boot.img) parser written in Rust
 
 Thank you to

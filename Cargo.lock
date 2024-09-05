@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "abootimg-oxide"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "binrw",
 ]
@@ -160,7 +160,7 @@ checksum = "7943c866cc5cd64cbc25b2e01621d07fa8eb2a1a23160ee81ce38704e97b8ecf"
 
 [[package]]
 name = "mkbootimg"
-version = "0.1.0"
+version = "0.1.1"
 
 [[package]]
 name = "owo-colors"
@@ -228,7 +228,7 @@ checksum = "3354b9ac3fae1ff6755cb6db53683adb661634f67557942dea4facebec0fee4b"
 
 [[package]]
 name = "unpack_bootimg"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "abootimg-oxide",
  "clap",
