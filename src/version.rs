@@ -13,7 +13,7 @@ use binrw::{BinRead, BinWrite};
 /// * 4 bits indicate patch month
 #[derive(BinRead, BinWrite, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[br(little)]
-pub struct OsVersionPatch(u32);
+pub struct OsVersionPatch(pub u32);
 
 impl OsVersionPatch {
     /// Creates a new `OsVersionPatch`.
@@ -36,8 +36,14 @@ impl fmt::Debug for OsVersionPatch {
     }
 }
 
+/// OS patch level
+///
+/// # Bitwise format
+///
+/// * 12 bits indicate year
+/// * 4 bits indicate month
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct OsPatch(u16);
+pub struct OsPatch(pub u16);
 impl OsPatch {
     /// Creates a new `OsPatch`.
     pub fn new(year: u16, month: u8) -> Self {
@@ -66,8 +72,15 @@ impl fmt::Debug for OsPatch {
     }
 }
 
+/// OS version
+///
+/// # Bitwise format
+///
+/// * 7 bits indicate first part
+/// * 7 bits indicate second part
+/// * 7 bits indicate third part
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct OsVersion(u32);
+pub struct OsVersion(pub u32);
 impl OsVersion {
     /// Creates a new `OsVersion`.
     pub fn new(a: u8, b: u8, c: u8) -> Self {
