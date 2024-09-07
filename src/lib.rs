@@ -10,7 +10,7 @@ use binrw::{binrw, io::NoSeek, BinRead, BinWrite};
 
 mod vendor;
 mod version;
-pub use vendor::VendorHeader;
+pub use vendor::{VendorHeader, VendorHeaderV4};
 pub use version::{OsPatch, OsVersion, OsVersionPatch};
 
 /// Android boot image header versions 0, 1 and 2
@@ -345,5 +345,4 @@ impl Header {
     }
 }
 
-// TODO: vendor boot img header
 // TODO: unit tests

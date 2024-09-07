@@ -1,5 +1,7 @@
 use binrw::{binrw, BinRead, BinWrite};
 
+// TODO: pretty section layout using asciiflow.com
+
 /// Android vendor boot image header version 3 and 4
 #[binrw]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
@@ -60,8 +62,12 @@ impl VendorHeader {
 /// V4-specific fields of the Android vendor boot image header
 #[derive(BinRead, BinWrite, Clone, Debug, PartialEq, Eq, Hash)]
 pub struct VendorHeaderV4 {
+    /// Vendor ramdisk table size
     pub vendor_ramdisk_table_size: u32,
+    /// Vendor ramdisk entry number
     pub vendor_ramdisk_table_entry_num: u32,
+    /// Vendor ramdisk entry size
     pub vendor_ramdisk_table_entry_size: u32,
+    /// Bootconfig size
     pub bootconfig_size: u32,
 }
