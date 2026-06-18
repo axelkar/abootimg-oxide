@@ -14,7 +14,7 @@ categories = ["parser-implementations", "no-std"]
 binrw = { version = "0.15.0", default-features = false, features = ["verbose-backtrace"] }
 document-features = "0.2.12"
 digest = { version = "0.11.2", optional = true }
-thiserror = "2.0.18"
+thiserror = { version = "2.0.18", default-features = false }
 
 [dev-dependencies]
 expect-test-bytes = "0.1.0"
@@ -29,7 +29,7 @@ workspace = true
 default = ["std"]
 
 ## Enables [`binrw`](mod@binrw)'s `std` feature. See its documentation for more. Disabling this feature will make this crate `no_std`-compatible, while still requiring `alloc`.
-std = ["binrw/std"]
+std = ["binrw/std", "thiserror/std"]
 
 ## Provide the [`HeaderV0::compute_hash_digest`] helper
 hash = ["dep:digest"]
