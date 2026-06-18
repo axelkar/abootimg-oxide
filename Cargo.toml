@@ -57,7 +57,7 @@ members = ["mkbootimg", "unpack_bootimg"]
 resolver = "2"
 
 [workspace.package]
-version = "0.5.1"
+version = "0.5.2"
 authors = ["Axel Karjalainen <axel@axka.fi>"]
 repository = "https://github.com/axelkar/abootimg-oxide"
 license = "MIT OR Apache-2.0"
