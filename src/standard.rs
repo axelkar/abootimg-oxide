@@ -216,6 +216,9 @@ impl HeaderV0 {
     ///
     /// - Requires the Rust standard library for [`std::io::copy`].
     /// - Assumes that the readers will output exact amounts. That is, `kernel` will only ever output exactly [`Self::kernel_size`] bytes.
+    /// - Assumes that the writer supports seeking up to [`Self::boot_image_size()`]. Note that
+    ///   POSIX-compatible filesystems automatically extend the file so you shouldn't need to
+    ///   worry about calling [`std::fs::File::set_len()`]).
     ///
     /// # Errors
     ///

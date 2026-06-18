@@ -22,6 +22,13 @@ struct Args {
     #[arg(long)]
     no_write: bool,
 
+    /// Whether to also extract any "extra" data after defined sections (added in abootimg-oxide).
+    ///
+    /// The "extra" data may contain, for example, an AVB VBMeta image with the magic string "AVBf"
+    /// and an AVB footer with the magic string "AVB0".
+    #[arg(long)]
+    extract_extra: bool,
+
     /// Text output format
     #[arg(value_enum, long, default_value_t = TextOutputFormat::Info)]
     format: TextOutputFormat,
@@ -66,9 +73,17 @@ fn main() {
     // Get the inner File, so copy_file_range can be used
     let r = r.get_mut();
 
-    create_dir_all(&args.out).unwrap();
+    if !args.no_write {
+        create_dir_all(&args.out).unwrap();
+    }
 
+    let mut max_end_pos = 0;
     let mut extract_part = |pos: usize, size: u32, path: &Path| {
+        let end_pos = pos + size as usize;
+        if end_pos > max_end_pos {
+            max_end_pos = end_pos;
+        }
+
         if args.no_write {
             return;
         }
@@ -125,6 +140,17 @@ fn main() {
                     &args.out.join("boot_signature"),
                 );
             }
+        }
+    }
+
+    if args.extract_extra {
+        let file_len = r.metadata().unwrap().len();
+        let diff = file_len as i64 - max_end_pos as i64;
+        println!("max_end_pos={max_end_pos:#x}, file_len={file_len:#x}. diff={diff:#x}");
+
+        if !args.no_write && (max_end_pos as u64) < file_len {
+            r.seek(SeekFrom::Start(max_end_pos as u64)).unwrap();
+            io::copy(r, &mut File::create(args.out.join("extra")).unwrap()).unwrap();
         }
     }
 
